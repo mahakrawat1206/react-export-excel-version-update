@@ -22,7 +22,7 @@
   "homepage": "https://github.com/rdcalle/react-export-excel#readme",
   "dependencies": {
     "file-saver": "1.3.8",
-    "xlsx": "git+https://github.com/securedeveloper/js-xlsx.git"
+    "xlsx": "git+https://github.com/mahakrawat1206/js-xlxs.git#github"
   },
   "devDependencies": {
     "@commitlint/cli": "6.1.3",
