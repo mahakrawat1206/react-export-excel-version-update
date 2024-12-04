@@ -22,7 +22,7 @@
   "homepage": "https://github.com/rdcalle/react-export-excel#readme",
   "dependencies": {
     "file-saver": "^2.0.5",
-    "xlsx": "git+https://github.com/mahakrawat1206/xlsx-version-update.git#main"
+    "xlsx": "git+https://github.com/mahakrawat1206/xlsx-version-update.git#master"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.10",
