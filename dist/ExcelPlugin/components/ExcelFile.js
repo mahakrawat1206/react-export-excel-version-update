@@ -3,110 +3,89 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require("prop-types");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
+exports["default"] = void 0;
+var _react = _interopRequireDefault(require("react"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
 var _fileSaver = require("file-saver");
-
-var _xlsx = require("xlsx");
-
-var _xlsx2 = _interopRequireDefault(_xlsx);
-
-var _ExcelSheet = require("../elements/ExcelSheet");
-
-var _ExcelSheet2 = _interopRequireDefault(_ExcelSheet);
-
+var _xlsx = _interopRequireDefault(require("xlsx"));
+var _ExcelSheet = _interopRequireDefault(require("../elements/ExcelSheet"));
 var _DataUtil = require("../utils/DataUtil");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var ExcelFile = function (_React$Component) {
-  _inherits(ExcelFile, _React$Component);
-
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+var ExcelFile = /*#__PURE__*/function (_React$Component) {
   function ExcelFile(props) {
+    var _this;
     _classCallCheck(this, ExcelFile);
-
-    var _this = _possibleConstructorReturn(this, (ExcelFile.__proto__ || Object.getPrototypeOf(ExcelFile)).call(this, props));
-
-    _initialiseProps.call(_this);
-
+    _this = _callSuper(this, ExcelFile, [props]);
+    _defineProperty(_this, "fileExtensions", ["xlsx", "xls", "csv", "txt", "html"]);
+    _defineProperty(_this, "defaultFileExtension", "xlsx");
     if (_this.props.hideElement) {
       _this.download();
     } else {
       _this.handleDownload = _this.download.bind(_this);
     }
-
     _this.createSheetData = _this.createSheetData.bind(_this);
     return _this;
   }
-
-  _createClass(ExcelFile, [{
+  _inherits(ExcelFile, _React$Component);
+  return _createClass(ExcelFile, [{
     key: "createSheetData",
     value: function createSheetData(sheet) {
       var columns = sheet.props.children;
-      var sheetData = [_react2.default.Children.map(columns, function (column) {
+      var sheetData = [_react["default"].Children.map(columns, function (column) {
         return column.props.label;
       })];
       var data = typeof sheet.props.data === "function" ? sheet.props.data() : sheet.props.data;
-
       data.forEach(function (row) {
         var sheetRow = [];
-
-        _react2.default.Children.forEach(columns, function (column) {
+        _react["default"].Children.forEach(columns, function (column) {
           var getValue = typeof column.props.value === "function" ? column.props.value : function (row) {
             return row[column.props.value];
           };
           var itemValue = getValue(row);
           sheetRow.push(isNaN(itemValue) ? itemValue || "" : itemValue);
         });
-
         sheetData.push(sheetRow);
       });
-
       return sheetData;
     }
   }, {
     key: "download",
     value: function download() {
       var _this2 = this;
-
       var wb = {
-        SheetNames: _react2.default.Children.map(this.props.children, function (sheet) {
+        SheetNames: _react["default"].Children.map(this.props.children, function (sheet) {
           return sheet.props.name;
         }),
         Sheets: {}
       };
-
-      _react2.default.Children.forEach(this.props.children, function (sheet) {
+      _react["default"].Children.forEach(this.props.children, function (sheet) {
         if (typeof sheet.props.dataSet === "undefined" || sheet.props.dataSet.length === 0) {
           wb.Sheets[sheet.props.name] = (0, _DataUtil.excelSheetFromAoA)(_this2.createSheetData(sheet));
         } else {
           wb.Sheets[sheet.props.name] = (0, _DataUtil.excelSheetFromDataSet)(sheet.props.dataSet);
         }
       });
-
       var fileExtension = this.getFileExtension();
       var fileName = this.getFileName();
-      var wbout = _xlsx2.default.write(wb, {
+      var wbout = _xlsx["default"].write(wb, {
         bookType: fileExtension,
         bookSST: true,
         type: "binary"
       });
-
       (0, _fileSaver.saveAs)(new Blob([(0, _DataUtil.strToArrBuffer)(wbout)], {
         type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
       }), fileName);
@@ -123,7 +102,6 @@ var ExcelFile = function (_React$Component) {
     key: "getFileExtension",
     value: function getFileExtension() {
       var extension = this.props.fileExtension;
-
       if (extension.length === 0) {
         var slugs = this.props.filename.split(".");
         if (slugs.length === 0) {
@@ -131,68 +109,49 @@ var ExcelFile = function (_React$Component) {
         }
         extension = slugs[slugs.length - 1];
       }
-
       if (this.fileExtensions.indexOf(extension) !== -1) {
         return extension;
       }
-
       return this.defaultFileExtension;
     }
   }, {
     key: "getFileNameWithExtension",
     value: function getFileNameWithExtension(filename, extension) {
-      return filename + "." + extension;
+      return "".concat(filename, ".").concat(extension);
     }
   }, {
     key: "render",
     value: function render() {
-      var _props = this.props,
-          hideElement = _props.hideElement,
-          element = _props.element;
-
-
+      var _this$props = this.props,
+        hideElement = _this$props.hideElement,
+        element = _this$props.element;
       if (hideElement) {
         return null;
       } else {
-        return _react2.default.createElement(
-          "span",
-          { onClick: this.handleDownload },
-          element
-        );
+        return /*#__PURE__*/_react["default"].createElement("span", {
+          onClick: this.handleDownload
+        }, element);
       }
     }
   }]);
-
-  return ExcelFile;
-}(_react2.default.Component);
-
-ExcelFile.props = {
-  hideElement: _propTypes2.default.bool,
-  filename: _propTypes2.default.string,
-  fileExtension: _propTypes2.default.string,
-  element: _propTypes2.default.any,
+}(_react["default"].Component);
+_defineProperty(ExcelFile, "props", {
+  hideElement: _propTypes["default"].bool,
+  filename: _propTypes["default"].string,
+  fileExtension: _propTypes["default"].string,
+  element: _propTypes["default"].any,
   children: function children(props, propName, componentName) {
-    _react2.default.Children.forEach(props[propName], function (child) {
-      if (child.type !== _ExcelSheet2.default) {
+    _react["default"].Children.forEach(props[propName], function (child) {
+      if (child.type !== _ExcelSheet["default"]) {
         throw new Error("<ExcelFile> can only have <ExcelSheet> as children. ");
       }
     });
   }
-};
-ExcelFile.defaultProps = {
+});
+_defineProperty(ExcelFile, "defaultProps", {
   hideElement: false,
   filename: "Download",
   fileExtension: "xlsx",
-  element: _react2.default.createElement(
-    "button",
-    null,
-    "Download"
-  )
-};
-
-var _initialiseProps = function _initialiseProps() {
-  this.fileExtensions = ["xlsx", "xls", "csv", "txt", "html"];
-  this.defaultFileExtension = "xlsx";
-};
-
-exports.default = ExcelFile;
+  element: /*#__PURE__*/_react["default"].createElement("button", null, "Download")
+});
+var _default = exports["default"] = ExcelFile;

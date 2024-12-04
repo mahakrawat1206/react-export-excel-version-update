@@ -1,34 +1,21 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
-
-var _ExcelFile = require("./ExcelPlugin/components/ExcelFile");
-
-var _ExcelFile2 = _interopRequireDefault(_ExcelFile);
-
-var _ExcelSheet = require("./ExcelPlugin/elements/ExcelSheet");
-
-var _ExcelSheet2 = _interopRequireDefault(_ExcelSheet);
-
-var _ExcelColumn = require("./ExcelPlugin/elements/ExcelColumn");
-
-var _ExcelColumn2 = _interopRequireDefault(_ExcelColumn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-_ExcelFile2.default.ExcelSheet = _ExcelSheet2.default;
-_ExcelFile2.default.ExcelColumn = _ExcelColumn2.default;
-
+exports["default"] = void 0;
+var _ExcelFile = _interopRequireDefault(require("./ExcelPlugin/components/ExcelFile"));
+var _ExcelSheet = _interopRequireDefault(require("./ExcelPlugin/elements/ExcelSheet"));
+var _ExcelColumn = _interopRequireDefault(require("./ExcelPlugin/elements/ExcelColumn"));
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+_ExcelFile["default"].ExcelSheet = _ExcelSheet["default"];
+_ExcelFile["default"].ExcelColumn = _ExcelColumn["default"];
 var ReactExport = {
-    ExcelFile: _ExcelFile2.default
+  ExcelFile: _ExcelFile["default"]
 };
-
-exports.default = ReactExport;
-
+var _default = exports["default"] = ReactExport;
 exports.modules = {
-    ExcelFile: _ExcelFile2.default,
-    ExcelSheet: _ExcelSheet2.default,
-    ExcelColumn: _ExcelColumn2.default
+  ExcelFile: _ExcelFile["default"],
+  ExcelSheet: _ExcelSheet["default"],
+  ExcelColumn: _ExcelColumn["default"]
 };
